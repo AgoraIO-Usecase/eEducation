@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams } from "react-router";
 import { Theme, FormControl, Tooltip } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {CustomButton} from '@/components/custom-button';
@@ -30,13 +31,6 @@ type SessionInfo = {
   role: string
 }
 
-const defaultState: SessionInfo = {
-  roomName: '',
-  roomType: 0,
-  role: '',
-  userName: '',
-}
-
 const roomTypes = isElectron ?  UIStore.roomTypes.filter((it: any) => it.value !== 3) : UIStore.roomTypes
 
 
@@ -50,6 +44,13 @@ function HomePage() {
   const uiStore = useUIStore();
 
   const appStore = useAppStore();
+let { roomName,roomType,userType }  = useParams<any>();
+const defaultState: SessionInfo = {
+  roomName: roomName,
+  roomType: roomType,
+  role:userType,
+  userName: '',
+}
 
   const handleSetting = (evt: any) => {
     history.push({pathname: '/setting'})
@@ -232,7 +233,7 @@ function HomePage() {
               />
             </FormControl>
             <FormControl className={classes.formControl}>
-              <RoleRadio value={session.role} type={session.roomType} onChange={(evt: any) => {
+              <RoleRadio value={session.role}  type={session.roomType} onChange={(evt: any) => {
                  setSessionInfo({
                    ...session,
                    role: evt.target.value

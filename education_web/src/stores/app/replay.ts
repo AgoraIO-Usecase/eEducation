@@ -121,7 +121,7 @@ export class ReplayStore {
         beginTimestamp: this.startTime,
         duration: this.duration,
         room: this.boardId,
-        mediaURL: `${cdnPrefix}/${this.mediaUrl}`,
+        // mediaURL: `${cdnPrefix}/${this.mediaUrl}`,
         roomToken: this.boardToken,
       });
       this.player = this.boardClient.player

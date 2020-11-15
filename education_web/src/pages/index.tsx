@@ -59,6 +59,9 @@ export default function () {
           <Route path="/replay/record/:roomUuid">
             <ReplayPage />
           </Route>
+          <Route exact path="/lecture/:roomName/:roomType/:userType">
+            <Home />
+          </Route>
           <Route exact path="/">
             <Home />
           </Route>

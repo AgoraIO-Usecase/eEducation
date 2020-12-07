@@ -1,6 +1,6 @@
 import { AgoraRTCClient, AgoraStreamSpec, DeviceInfo } from './agora-rtc-client';
 import { roomStore, RoomStore } from '../stores/room';
-import { isEmpty } from 'lodash';
+import { get, isEmpty } from 'lodash';
 import EventEmitter from 'events';
 import AgoraRTC from 'agora-rtc-sdk';
 import { APP_ID } from './config';
@@ -216,10 +216,10 @@ export class AgoraWebClient {
     if (!data.cameraId || !data.microphoneId) {
       let devices = await this.getDevices()
       if (!data.cameraId) {
-        data.cameraId = devices.filter((it: any) => it.kind === 'videoinput')[0].deviceId
+        data.cameraId = get(devices.filter((it: any) => it.kind === 'videoinput'), '[0].deviceId', '')
       }
       if (!data.microphoneId) {
-        data.microphoneId = devices.filter((it: any) => it.kind === 'audioinput')[0].deviceId
+        data.microphoneId = get(devices.filter((it: any) => it.kind === 'audioinput'), '[0].deviceId', '')
       }
     }
 

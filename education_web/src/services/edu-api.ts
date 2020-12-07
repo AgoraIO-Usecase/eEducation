@@ -75,6 +75,8 @@ export interface EntryParams {
   userUuid: string
   type: number
   role: number
+  enableVideo: number
+  enableAudio: number
 }
 
 export type RoomParams = Partial<{
@@ -653,7 +655,9 @@ export class AgoraEduApi {
       token: this.userToken,
       data: {
         type: 4,
-        userIds: [userId]
+        userIds: [userId],
+        enableVideo: 0,
+        enableAudio: 1,
       }
     })
     return data;

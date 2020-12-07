@@ -652,7 +652,9 @@ export class RoomStore {
         role,
         type,
         roomUuid: roomName,
-        userUuid: uuid
+        userUuid: uuid,
+        enableVideo: 0,
+        enableAudio: 1
       })
 
       const {

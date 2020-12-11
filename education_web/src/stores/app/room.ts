@@ -813,10 +813,22 @@ export class RoomStore extends SimpleInterval {
   }
 
   @action
-  async join() {
+  async join(urlParams: URLSearchParams) {
     try {
       this.appStore.uiStore.startLoading()
       this.roomApi = new RoomApi()
+      // 在这里加入你的请求逻辑
+      /**
+        * let res = await this.axios.post<T>(path, null, params)
+       */
+
+      /**
+       * http://localhost:3000/?your_room_type=xxx
+       * const your_room_type = urlParams.get("your_room_type") 
+       * 通过url获取 your_room_type的值
+       */
+
+      // 这里是教育demo的核心逻辑 需要把this.roomInfo 相关的代码都替换为url params传递进来的值
       let {roomUuid} = await this.roomApi.fetchRoom({
         roomName: `${this.roomInfo.roomName}`,
         roomType: +this.roomInfo.roomType as number,

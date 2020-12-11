@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, useParams } from 'react-router-dom';
 import {NavController} from '@/components/nav';
 import NativeSharedWindow from '@/components/native-shared-window';
 import { DeviceDetectController } from '../device-detect';
@@ -47,6 +47,8 @@ const RoomController = observer(({children}: any) => {
 
   const history = useHistory()
 
+  const urlParams = new URLSearchParams(location.search)
+
   useEffect(() => {
     if (!appStore.userRole) {
       history.push('/')
@@ -70,7 +72,7 @@ const RoomController = observer(({children}: any) => {
     let pathList = location.pathname.split('/')
     let path = pathList[pathList.length - 1]
 
-    roomStore.join().then(() => {
+    roomStore.join(urlParams).then(() => {
       uiStore.addToast(t('toast.successfully_joined_the_room'))
     }).catch((err) => {
       console.warn(err.msg)

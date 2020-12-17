@@ -203,7 +203,7 @@ export class AppStore {
   @action
   setRoomInfo(payload: any) {
     this.roomInfo = ({
-      roomName: payload.roomUuid,
+      roomName: payload.roomName,
       roomType: payload.roomType,
       userName: payload.userName,
       userRole: payload.userRole,

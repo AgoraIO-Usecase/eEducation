@@ -1,7 +1,7 @@
 import React, { useRef , useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import { Theme, Typography, InputLabel, Input } from '@material-ui/core';
-import { UAParser } from "ua-parser-js"
+import UAParser from "ua-parser-js"
 import { isElectron } from '@/utils/platform';
 
 const parser = new UAParser()
@@ -41,11 +41,13 @@ export const FormInput = (props: any) => {
 
   const onCompositionEnd = (evt: any) => {
     imeLock.current = false
-    updateValue(props.value.replace(/[^0-9a-zA-Z$]/g, '').slice(0, LIMIT_LENGTH))
+    //updateValue(props.value.replace(/[^0-9a-zA-Z$]/g, '').slice(0, LIMIT_LENGTH))
+    updateValue(props.value.slice(0, LIMIT_LENGTH))
   }
 
   const onChange = (evt: any) => {
-    const val = evt.target.value.replace(/[^0-9a-zA-Z$]/g, '').slice(0, LIMIT_LENGTH)
+    //const val = evt.target.value.replace(/[^0-9a-zA-Z$]/g, '').slice(0, LIMIT_LENGTH)
+    const val = evt.target.value.slice(0, LIMIT_LENGTH)
     if (imeLock.current) {
     } else {
       evt.target.value = val

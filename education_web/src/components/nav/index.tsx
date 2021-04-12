@@ -206,17 +206,17 @@ export const Nav = observer((props: any) => {
           <span className="menu-split" />
           </>
           <div className={platform === 'web' ? "btn-group" : 'electron-btn-group'}>
-            {/* {platform === 'web' ?
+            {platform === 'web' ?
             <>
             <Tooltip title={t("icon.setting")} placement="bottom">
               <span>
                 <CustomIcon className="icon-setting" onClick={(evt: any) => {
-                  uiStore.showSetting()
+                 // uiStore.showSetting()
                 }}/>
               </span>
             </Tooltip>
             </> : null
-          } */}
+          }
             <UploadButton isBreakout={isBreakout} />
             <Tooltip title={t("icon.exit-room")} placement="bottom">
               <span>

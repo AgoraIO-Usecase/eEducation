@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import{ useLocation} from "react-router-dom";
 import { Theme, FormControl, Tooltip } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {CustomButton} from '@/components/custom-button';
@@ -15,6 +16,7 @@ import { UIStore } from '@/stores/app';
 import { GlobalStorage } from '@/utils/custom-storage';
 import { EduManager } from '@/sdk/education/manager';
 import {isElectron} from '@/utils/platform';
+import { Loading } from '@/components/loading';
 
 const useStyles = makeStyles ((theme: Theme) => ({
   formControl: {
@@ -39,7 +41,6 @@ const defaultState: SessionInfo = {
 
 const roomTypes = isElectron ?  UIStore.roomTypes.filter((it: any) => it.value !== 3) : UIStore.roomTypes
 
-
 function HomePage() {
   document.title = t(`home.short_title.title`)
 
@@ -50,6 +51,8 @@ function HomePage() {
   const uiStore = useUIStore();
 
   const appStore = useAppStore();
+
+  const query = new URLSearchParams(useLocation().search);
 
   const handleSetting = (evt: any) => {
     history.push({pathname: '/setting'})
@@ -107,17 +110,54 @@ function HomePage() {
       // history.push(`/classroom/${path}`)
   }
 
+  const gotoClass = (data : any) => {
+    const path = roomTypes[data.roomType].path;
+    appStore.setRoomInfo({
+      ...session,
+      roomName: data.roomName,
+      roomType: roomTypes[data.roomType].value,
+      role: data.role,
+      userName: data.yourName
+    })
+
+    if (session.role === 'assistant') {
+      appStore.uiStore.stopLoading();
+      history.push(`/breakout-class/assistant/courses`)
+    } else {
+      appStore.uiStore.stopLoading();
+      history.push(`/classroom/${path}`)
+    }  
+  } 
+
+  useEffect(()=>{    
+    if(query.get("roomname") && query.get("username") && query.get("roomtype") && query.get("role")){
+      appStore.uiStore.startLoading();
+      const formContainer : HTMLElement | null = document.getElementById("form_container");
+      if(formContainer)
+        formContainer.style.display = "none";
+      const roomType = query.get("roomtype");
+      let querydata : any = {
+        roomName : query.get("roomname")?query.get("roomname"):"",
+        roomType : roomType,
+        yourName : query.get("username"),
+        role : query.get("role"),
+      }
+      gotoClass(querydata);
+    }
+  },[query]); 
+
   return (
-    <div className={`flex-container ${uiStore.isElectron ? 'draggable' : 'home-cover-web' }`}>
+    <div id="form_container" className={`flex-container ${uiStore.isElectron ? 'draggable' : 'home-cover-web' }`}>
+      {appStore.uiStore.loading ?  <Loading />: null}
       {uiStore.isElectron ? null : 
       <div className="web-menu">
         <div className="web-menu-container">
           <div className="short-title">
-            <span className="title">{t('home.short_title.title')}</span>
+            {/* <span className="title">{t('home.short_title.title')}</span>
             <span className="subtitle">{t('home.short_title.subtitle')}</span>
-            <span className="build-version">{t("build_version")}</span>
+            <span className="build-version">{t("build_version")}</span> */}
           </div>
-          <div className="setting-container">
+{/*           <div className="setting-container">
             <div className="flex-row">
               <Tooltip title={t("icon.upload-log")} placement="top">
                 <span>
@@ -143,14 +183,14 @@ function HomePage() {
                 }}
                 items={UIStore.languages}>
               </LangSelect>
-          </div>
+          </div> */}
         </div>
       </div>
       }
       <div className="custom-card">
-        {!uiStore.isElectron ? <GithubIcon /> : null}
+        {/* {!uiStore.isElectron ? <GithubIcon /> : null} */}
         <div className="flex-item cover">
-          {uiStore.isElectron ? 
+          {/* {uiStore.isElectron ? 
           <>
           <div className={`short-title ${GlobalStorage.getLanguage()}`}>
             <span className="title">{t('home.short_title.title')}</span>
@@ -160,7 +200,7 @@ function HomePage() {
           <div className='build-version'>{t("build_version")}</div>
           </>
           : <div className={`cover-placeholder-web ${t('home.cover_class')}`}></div>
-          }
+          } */}
         </div>
         <div className="flex-item card">
           <div className="position-top card-menu">

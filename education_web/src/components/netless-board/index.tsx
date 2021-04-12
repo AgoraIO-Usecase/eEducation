@@ -6,7 +6,6 @@ import { useBoardStore } from '@/hooks';
 export const NetlessBoard = observer((props: any) => {
 
   const {ready} = useBoardStore()
-
   return (
     ready ? <Board /> : <div className="board-container"></div>
   )

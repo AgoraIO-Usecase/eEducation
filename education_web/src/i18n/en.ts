@@ -55,7 +55,8 @@ const en = {
     'color_picker': 'color picker',
     'add': 'add new page',
     'upload': 'upload ',
-    'hand_tool': 'hand selector'
+    'hand_tool': 'hand selector',
+    'stepapp':'Stepapp'
   },
   'error': {
     'not_found': 'Page Not Found',
@@ -195,7 +196,7 @@ const en = {
     'room_type': 'Room Type',
     'room_join': 'Join',
     'short_title': {
-      'title': 'Agora Cloud Class',
+      'title': 'Stepapp live Class',
       'subtitle': 'Powered by agora.io, a leading online learning engagement platform',
     },
     'name_too_long': 'name too long, should <= 20 characters',

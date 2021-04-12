@@ -43,7 +43,6 @@ const FolderMenuItem = (props: any) => {
 export const FolderMenu = observer(() => {
 
   const boardStore = useBoardStore()
-
   const onClose = () => boardStore.closeFolder()
 
   const handleClick = (scenePath: string) => boardStore.changeScenePath(scenePath)

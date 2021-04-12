@@ -8,13 +8,12 @@ import { observer } from 'mobx-react';
 import { useBoardStore } from '@/hooks';
 import { UploadNotice } from './upload/upload-notice';
 import './netless-whiteboard.scss';
+import {ShowFrame} from './openlink/showFrame'
+
 
 export const Board = observer(() => {
-
   const boardStore = useBoardStore()
-
   const boardRef = useRef<HTMLDivElement | null>(null)
-
 
   const mountToDOM = useCallback((dom: any) => {
     if (dom) {
@@ -32,6 +31,11 @@ export const Board = observer(() => {
       <FooterMenu/>
       <BoardLoading />
       <UploadNotice />
+      <ShowFrame />
+      {/* {boardStore.showStepappFrame ?
+          <ShowFrame />
+          : null
+        }  */}
     </div>
   )
 })

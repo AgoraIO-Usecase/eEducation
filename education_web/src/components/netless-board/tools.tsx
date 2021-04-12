@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {CustomIcon} from '@/components/icon';
 import { Tooltip, ClickAwayListener } from '@material-ui/core';
 import {UploadBtn} from './upload/upload-btn'
@@ -9,6 +9,7 @@ import { SketchPicker } from 'react-color';
 import { PPTProgressPhase } from '@/utils/upload-manager';
 import { get } from 'lodash';
 import { t } from '@/i18n';
+import {ShowFrame} from './openlink/showFrame'
 
 
 const ToolItem = (props: any) => {
@@ -37,6 +38,11 @@ export const Tools = observer(() => {
     switch(boardStore.selector) {
       case 'upload': {
         boardStore.setTool('')
+        break;
+      }
+      case 'stepapp': {
+       // boardStore.setTool('');
+       // boardStore.setTool('hand');
         break;
       }
       case 'color_picker': {
@@ -87,6 +93,7 @@ export const Tools = observer(() => {
           <UploadBtn />
           : null
         }
+         
       </div>
     </ClickAwayListener>
 

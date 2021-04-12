@@ -185,7 +185,6 @@
     "zlib": "^1.0.5"
   },
   "dependencies": {
-    "adm-zip": "^0.4.14",
-    "agora-electron-sdk": "education290"
+    "adm-zip": "^0.4.14"
   }
 }

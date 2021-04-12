@@ -4,6 +4,7 @@ import { videoPlugin } from '@netless/white-video-plugin';
 import { audioPlugin } from '@netless/white-audio-plugin';
 import { get } from 'lodash';
 
+
 const appIdentifier = process.env.REACT_APP_NETLESS_APP_ID as string
 
 export class BoardClient extends EventEmitter {
@@ -11,25 +12,27 @@ export class BoardClient extends EventEmitter {
   plugins?: Plugins<Object>;
   room!: Room;
   player!: Player;
-
   sceneIndex: number = 0;
 
   disconnected?: boolean = true
+  
 
   constructor(config: {identity: string} = {identity: 'guest'}) {
     super()
     this.initPlugins(config.identity)
     this.init()
-  }
-
-  initPlugins (identity: string) {
-    const plugins = createPlugins({"video": videoPlugin, "audio": audioPlugin});
-
-    plugins.setPluginContext("video", {identity});
-    plugins.setPluginContext("audio", {identity});
-    this.plugins = plugins;
+    
   }
   
+
+  initPlugins (identity: string) {
+    const plugins = createPlugins({"video": videoPlugin, "audio": audioPlugin });
+
+    plugins.setPluginContext("video", {identity});
+    plugins.setPluginContext("audio", {identity});    
+    this.plugins = plugins;
+  }
+
   init () {
     this.client = new WhiteWebSdk({
       deviceType: DeviceType.Surface,
@@ -40,8 +43,10 @@ export class BoardClient extends EventEmitter {
         reportLevelMask: "debug",
         printLevelMask: "debug",
       }
+      
     })
     this.disconnected = true
+    
   }
 
   async join(params: JoinRoomParams) {
@@ -156,6 +161,22 @@ export class BoardClient extends EventEmitter {
     if (this.room && !this.disconnected) {
       await this.room.disconnect()
       this.disconnected = true
+    }
+  }
+
+  showStepapp() {
+    if (this.room && !this.disconnected) {
+      this.room.setGlobalState({
+        showStepapp: 1
+      })
+    }
+  }
+
+  hideStepapp() {
+    if (this.room && !this.disconnected) {
+      this.room.setGlobalState({
+        showStepapp: 0
+      })
     }
   }
 

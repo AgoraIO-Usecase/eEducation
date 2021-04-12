@@ -60,8 +60,9 @@ const ToastMessage = (props: ToastProps) => {
 export const Toast = observer(() => {
 
   const uiStore = useUIStore()
-
-  return (
+  console.log("here toast");
+  return (<div></div>)
+  /* return (
     <div className="notice-message-container">
       {uiStore.toastQueue.map((message: string, idx: number) => 
         <ToastMessage
@@ -74,5 +75,5 @@ export const Toast = observer(() => {
         />
       )}
     </div>
-  )
+  ) */
 })

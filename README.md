@@ -1,3 +1,5 @@
+# This repository has been deprecated and archived. for potential upgrade or advice please seek help from our sales team. thanks.
+
 _其他语言版本_: [简体中文](README.zh.md)
 
 > This page introduces how to use eEducation 6.0.0. Please note that eEducation is not backward compatible. If you use eEducation 5.0.0, please refer to [eEducation 5.0.0 Project Guide](https://github.com/AgoraIO-Usecase/eEducation/wiki/eEducation-5.0.0-Project-Guide).
